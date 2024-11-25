@@ -1,5 +1,6 @@
 using System;
 using R3;
+using R3.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class ReactIntroduction : MonoBehaviour
     public Button ActionButton0;
     public Button ActionButton1;
     public Player Player;
+    public Text ScoreUI;
 
     void Start()
     {
@@ -27,6 +29,10 @@ public class ReactIntroduction : MonoBehaviour
             )
             .Where(damage => damage > 10)
             .Subscribe(damage => Debug.Log("Player takes" + damage)).AddTo(this);
+
+        Player.PlayerScore
+        .Subscribe(score => ScoreUI.text = "Player Score " + score)
+        .AddTo(this);
     }
 
     void Update()
